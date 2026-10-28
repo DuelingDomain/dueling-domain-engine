@@ -1,0 +1,11 @@
+-- A side-seat summon has no column toward which Yajiro can move.
+if not aux.MPColumnGeometry then return end
+local mp_mvcon,mp_mvop=s.mvcon,s.mvop
+function s.mvcon(e,tp,eg,ep,ev,re,r,rp)
+	if aux.MPColumnGeometry() and (#eg~=1 or Duel.MPSeatOf(eg:GetFirst())~=aux.MPColumnPeerSeat(aux.MPGeometrySeat(tp))) then return false end
+	return mp_mvcon(e,tp,eg,ep,ev,re,r,rp)
+end
+function s.mvop(e,tp,eg,ep,ev,re,r,rp)
+	if aux.MPColumnGeometry() and (#eg~=1 or Duel.MPSeatOf(eg:GetFirst())~=aux.MPColumnPeerSeat(aux.MPGeometrySeat(tp))) then return end
+	return mp_mvop(e,tp,eg,ep,ev,re,r,rp)
+end
